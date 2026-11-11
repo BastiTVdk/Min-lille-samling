@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="da" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Min lille samling X Hvis jeg mødte mig selv</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;600&family=Caveat:wght@400;500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'condensed': ['Antonio', 'sans-serif'],
+                        'hand': ['Caveat', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Subtil film-grain tekstur for et mere eksklusivt teater/film-look */
+        .bg-noise {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+
+        /* Præcis genskabelse af de horisontale blå lameller fra plakaten */
+        .blinds-pattern {
+            background-image: 
+                repeating-linear-gradient(
+                    to bottom,
+                    #000000 0px,
+                    #000000 10px,
+                    rgba(12, 74, 110, 0.38) 12px,
+                    rgba(34, 211, 238, 0.58) 15px,
+                    rgba(12, 74, 110, 0.38) 18px,
+                    #000000 20px
+                ),
+                radial-gradient(ellipse at 85% 50%, rgba(6, 182, 212, 0.55) 0%, rgba(15, 23, 42, 0.65) 60%, #000000 100%);
+            animation: blindsPulse 9s ease-in-out infinite alternate;
+        }
+
+        /* Præcis genskabelse af den varme rød/orange glød fra plakaten */
+        .amber-orb {
+            background: radial-gradient(
+                circle at center,
+                rgba(245, 158, 11, 0.58) 0%,
+                rgba(220, 38, 38, 0.52) 32%,
+                rgba(127, 29, 29, 0.22) 58%,
+                rgba(0, 0, 0, 0) 75%
+            );
+            filter: blur(42px);
+            animation: orbBreathe 10s ease-in-out infinite alternate;
+        }
+
+        /* Ren, ultra-subtil glassmorphism uden tunge skygger */
+        .glass-clean {
+            background: rgba(255, 255, 255, 0.018);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            transition: border-color 0.6s ease, background-color 0.6s ease;
+        }
+
+        .glass-clean:hover {
+            background: rgba(255, 255, 255, 0.032);
+            border-color: rgba(255, 255, 255, 0.14);
+        }
+
+        .glass-nav {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        /* Subtile animationer */
+        @keyframes orbBreathe {
+            0% { transform: scale(1) translate(0, 0); opacity: 0.85; }
+            100% { transform: scale(1.08) translate(8px, -10px); opacity: 1; }
+        }
+
+        @keyframes blindsPulse {
+            0% { opacity: 0.82; }
+            100% { opacity: 0.98; }
+        }
+
+        @keyframes scrollLine {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        .scroll-indicator::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.8), transparent);
+            animation: scrollLine 2.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+        }
+
+        /* Scroll reveal klasser */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 { transition-delay: 120ms; }
+        .delay-200 { transition-delay: 240ms; }
+        .delay-300 { transition-delay: 360ms; }
+
+        /* Minimalistisk scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #222;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-white selection:text-black bg-noise">
+
+    <!-- Ren, minimalistisk top-navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav">
+        <nav class="max-w-6xl mx-auto px-6 sm:px-12 h-16 flex items-center justify-between text-[11px] uppercase tracking-[0.28em] font-light text-zinc-400">
+            <a href="#top" class="text-white font-normal hover:opacity-70 transition duration-300">Hessellund</a>
+            <div class="hidden sm:flex items-center gap-10">
+                <a href="#samling" class="hover:text-white transition duration-300">Min lille samling</a>
+                <a href="#modte" class="hover:text-white transition duration-300">Hvis jeg mødte mig selv</a>
+            </div>
+            <a href="#info" class="text-white hover:opacity-70 transition duration-300">18. November</a>
+        </nav>
+    </header>
+
+    <!-- HERO: 1:1 med den kombinerede plakat -->
+    <section id="top" class="relative min-h-screen flex flex-col justify-between pt-28 pb-12 sm:py-24 px-6 sm:px-12 overflow-hidden">
+        
+        <!-- Baggrund: Blå striber til højre + rød/gul glød til venstre -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-0 right-0 w-[68%] sm:w-[60%] h-full blinds-pattern"
+                 style="mask-image: linear-gradient(to right, transparent 0%, black 22%, black 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 22%, black 100%);">
+            </div>
+            <div class="absolute top-[26%] left-[-8%] sm:left-[12%] w-[300px] sm:w-[460px] h-[300px] sm:h-[460px] amber-orb rounded-full"></div>
+        </div>
+
+        <!-- Top: Skrevet og iscenesat af -->
+        <div class="relative z-10 text-center pt-2 sm:pt-4 reveal visible">
+            <p class="text-[11px] sm:text-xs tracking-[0.26em] text-zinc-400 font-light">Skrevet og iscenesat Af</p>
+            <p class="text-sm sm:text-lg tracking-[0.26em] text-zinc-200 font-extralight mt-1">Marius E. Hessellund</p>
+        </div>
+
+        <!-- Midt: Titlerne sat præcis som på plakaten -->
+        <div class="relative z-10 max-w-4xl w-full mx-auto my-auto py-10 flex flex-col items-center">
+            <div class="w-full text-center sm:text-left sm:pl-6 md:pl-12 reveal visible delay-100">
+                <h1 class="font-condensed text-6xl sm:text-8xl md:text-[7.4rem] text-white tracking-normal leading-none">
+                    Min lille samling
+                </h1>
+            </div>
+
+            <div class="my-4 sm:my-6 reveal visible delay-200">
+                <span class="font-sans font-extralight text-3xl sm:text-5xl text-white/85 select-none">X</span>
+            </div>
+
+            <div class="w-full text-center sm:text-right sm:pr-4 md:pr-8 reveal visible delay-300">
+                <h2 class="font-hand text-5xl sm:text-7xl md:text-[5.6rem] text-white leading-none">
+                    Hvis jeg mødte mig selv
+                </h2>
+            </div>
+        </div>
+
+        <!-- Bund: Sted, dato og subtil scroll-linje -->
+        <div class="relative z-10 text-center space-y-2 reveal visible delay-300">
+            <p class="text-sm sm:text-xl tracking-[0.34em] text-zinc-300 font-extralight uppercase">
+                Sankt Annæ Gymnasium
+            </p>
+            <p class="text-base sm:text-xl tracking-[0.32em] text-white font-semibold uppercase">
+                D. 18 November <span class="font-light text-zinc-400">kl. 18.00</span>
+            </p>
+            <div class="pt-6 flex justify-center">
+                <a href="#samling" aria-label="Scroll ned" class="relative w-[1px] h-10 bg-white/15 overflow-hidden scroll-indicator block"></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- STYKKE 1: MIN LILLE SAMLING -->
+    <section id="samling" class="relative min-h-screen flex items-center py-28 sm:py-36 px-6 sm:px-12 border-t border-white/10 overflow-hidden">
+        <!-- Den varme glød i baggrunden -->
+        <div class="absolute top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[520px] h-[320px] sm:h-[520px] amber-orb rounded-full pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-4xl mx-auto w-full">
+            <!-- Navne i toppen præcis som på plakat 1 -->
+            <div class="grid grid-cols-2 gap-4 max-w-xl mx-auto text-center mb-20 sm:mb-28 reveal">
+                <div>
+                    <div class="text-lg sm:text-2xl font-normal tracking-[0.22em] text-white">Marius</div>
+                    <div class="text-xs sm:text-base font-extralight tracking-[0.22em] text-zinc-400 mt-1">E. Hessellund</div>
+                </div>
+                <div>
+                    <div class="text-lg sm:text-2xl font-normal tracking-[0.22em] text-white">Elias</div>
+                    <div class="text-xs sm:text-base font-extralight tracking-[0.22em] text-zinc-400 mt-1">E. Hessellund</div>
+                </div>
+            </div>
+
+            <!-- Titel & Citat fra plakaten -->
+            <div class="text-center mb-14 sm:mb-20 reveal delay-100">
+                <h2 class="font-condensed text-6xl sm:text-8xl md:text-9xl text-white tracking-normal leading-none">
+                    Min lille samling
+                </h2>
+                <p class="text-zinc-300 font-light text-xs sm:text-sm tracking-wide mt-6 max-w-md mx-auto leading-relaxed">
+                    “Jeg havde det hele planlagt, alt ned til mindste detalje.<br>De kan ikke glemme os.”
+                </p>
+            </div>
+
+            <!-- Ren intro uden AI-formuleringer eller tankestreger -->
+            <div class="glass-clean p-8 sm:p-12 max-w-xl mx-auto reveal delay-200">
+                <div class="space-y-5 text-zinc-200 font-extralight text-sm sm:text-base leading-[1.9] tracking-[0.01em] text-center">
+                    <p>
+                        En mand har gennem hele sit liv taget billeder af menneskene omkring sig, men han er aldrig selv kommet med på nogen af dem.
+                    </p>
+                    <p class="text-zinc-400">
+                        På sin fødselsdag har han inviteret alle sine gamle bekendte for at holde en tale om de mange billeder, han har taget. Da ingen af dem dukker op, ender han med at holde talen for sig selv.
+                    </p>
+                    <p class="text-zinc-400">
+                        Et visuelt skuespil, hvor minder, lyd og billeder langsomt lukker op for det, han har forsøgt at glemme.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Krediteringslinje nederst som på plakat 1 -->
+            <div class="text-center mt-16 sm:mt-20 reveal delay-300">
+                <p class="text-[10px] sm:text-[11px] tracking-[0.26em] text-zinc-500 font-light">Skrevet og iscenesat Af</p>
+                <p class="text-xs sm:text-sm tracking-[0.26em] text-zinc-300 font-extralight mt-1">Marius E. Hessellund</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STYKKE 2: HVIS JEG MØDTE MIG SELV -->
+    <section id="modte" class="relative min-h-screen flex items-center py-28 sm:py-36 px-6 sm:px-12 border-t border-white/10 overflow-hidden">
+        <!-- De blå striber i højre side som på plakaten -->
+        <div class="absolute top-0 right-0 w-full md:w-[58%] h-full blinds-pattern pointer-events-none"
+             style="mask-image: linear-gradient(to right, transparent 0%, black 25%, black 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 25%, black 100%);">
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto w-full">
+            <!-- Navne i toppen præcis som på plakat 2 -->
+            <div class="grid grid-cols-2 gap-4 max-w-xl mx-auto text-center mb-16 sm:mb-24 reveal">
+                <div>
+                    <div class="text-lg sm:text-2xl font-normal tracking-[0.22em] text-white">Marius</div>
+                    <div class="text-xs sm:text-base font-extralight tracking-[0.22em] text-zinc-400 mt-1">E. Hessellund</div>
+                </div>
+                <div>
+                    <div class="text-lg sm:text-2xl font-normal tracking-[0.22em] text-white">Elias</div>
+                    <div class="text-xs sm:text-base font-extralight tracking-[0.22em] text-zinc-400 mt-1">E. Hessellund</div>
+                </div>
+            </div>
+
+            <!-- Titel som på plakat 2 -->
+            <div class="text-center mb-14 sm:mb-20 reveal delay-100">
+                <h2 class="font-hand text-6xl sm:text-8xl md:text-9xl text-white leading-none">
+                    Hvis jeg mødte mig selv
+                </h2>
+            </div>
+
+            <!-- Ren intro uden AI-formuleringer eller tankestreger -->
+            <div class="glass-clean p-8 sm:p-12 max-w-xl mx-auto reveal delay-200">
+                <div class="space-y-5 text-zinc-200 font-extralight text-sm sm:text-base leading-[1.9] tracking-[0.01em] text-center">
+                    <p class="text-zinc-300">
+                        “Hvis jeg en dag mødte mig selv for første gang, så tror jeg, at jeg ville hade de fleste afkroge af den person. Hvorfor skulle jeg snakke med sådan en?”
+                    </p>
+                    <p class="text-zinc-400">
+                        En monolog om at drømme uden at turde skabe, om ulykkelig kærlighed og om frygten for en dag at stå over for sig selv.
+                    </p>
+                    <p class="text-zinc-400">
+                        Fortalt helt tæt på gennem ord, lys og rum.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Krediteringslinje nederst som på plakat 2 -->
+            <div class="text-center mt-16 sm:mt-20 reveal delay-300">
+                <p class="text-[10px] sm:text-[11px] tracking-[0.26em] text-zinc-500 font-light">Skrevet og iscenesat Af</p>
+                <p class="text-xs sm:text-sm tracking-[0.26em] text-zinc-300 font-extralight mt-1">Marius E. Hessellund</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRAKTISK INFO / AFSLUTNING -->
+    <section id="info" class="relative py-24 sm:py-32 px-6 sm:px-12 border-t border-white/10">
+        <div class="max-w-3xl mx-auto text-center space-y-12 reveal">
+            <p class="max-w-lg mx-auto text-zinc-300 font-extralight text-sm sm:text-base leading-[1.9] tracking-[0.01em]">
+                Aftenen byder på to sammenhængende værker. Du kan forvente et visuelt skuespil skabt til at røre gennem billede, lyd og tekst.
+            </p>
+
+            <div class="space-y-3 pt-4">
+                <p class="text-base sm:text-2xl tracking-[0.34em] text-zinc-300 font-extralight uppercase">
+                    Sankt Annæ Gymnasium
+                </p>
+                <p class="text-lg sm:text-2xl tracking-[0.32em] text-white font-semibold uppercase">
+                    D. 18 November kl. 18.00
+                </p>
+                <p class="text-xs tracking-[0.22em] text-zinc-500 font-light uppercase pt-1">
+                    Sjælør Boulevard 135, 2500 Valby
+                </p>
+            </div>
+
+            <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-16 text-xs tracking-[0.24em] text-zinc-400 font-extralight">
+                <div>
+                    <span class="text-zinc-600 block text-[10px] uppercase mb-1">Medvirkende</span>
+                    Marius E. Hessellund & Elias E. Hessellund
+                </div>
+                <div>
+                    <span class="text-zinc-600 block text-[10px] uppercase mb-1">Skrevet og iscenesat af</span>
+                    Marius E. Hessellund
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Subtil fade-in animation når man scroller ned på siden
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+    </script>
+
+</body>
+</html>
